@@ -305,6 +305,15 @@ nodemon app.js
 
 
 Output 
+```java
+[nodemon] 2.0.15
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,json
+[nodemon] starting `node app.js`
+Server listening on port 3000
+connected
+```
 
 Open your browser to http://localhost:3000/ .  You should now see:
  
