@@ -8,28 +8,56 @@ Last Updated : 06 Oct, 2021
 
 Prerequisites: For getting started with this you should have some familiarity with NodeJS, ExpressJS, MongoDB and Mongoose.
 
-NodeJS: It is a free open source server environment that uses JavaScript on the server and runs on various platform (Windows, Linux, Unix, Mac OS X, etc.).It uses asynchronous programming.
-ExpressJS: It is a NodeJS web application server framework, designed for building single-page, multi-page, and hybrid web applications. It is the de facto standard server framework for node.
-MongoDB: MongoDB is a NoSQL database.MongoDB is a JSON document datastore. It allows you to store and query JSON style documents with a few smarts on top.
-Mongoose: Mongoose is an Object Data Modeling (ODM) library for MongoDB and Node. js. It manages relationships between data, provides schema validation, and is used to translate between objects in code and the representation of those objects in MongoDB.
+- [NodeJS](https://www.geeksforgeeks.org/introduction-to-nodejs/): It is a free open source server environment that uses JavaScript on the server and runs on various platform (Windows, Linux, Unix, Mac OS X, etc.).It uses asynchronous programming.
+- [ExpressJS](https://www.geeksforgeeks.org/introduction-to-express/): It is a NodeJS web application server framework, designed for building single-page, multi-page, and hybrid web applications. It is the de facto standard server framework for node.
+- [MongoDB](https://en.wikipedia.org/wiki/MongoDB): MongoDB is a NoSQL database.MongoDB is a JSON document datastore. It allows you to store and query JSON style documents with a few smarts on top.
+- [Mongoose](https://mongoosejs.com/): Mongoose is an Object Data Modeling (ODM) library for MongoDB and Node. js. It manages relationships between data, provides schema validation, and is used to translate between objects in code and the representation of those objects in MongoDB.
+
 To start, install the required packages and modules:
 
-Resolution Days 2022 GeeksforGeeks
 
 ExpressJS allows us to set up middleware to respond to HTTP Requests.
+
+```java
 npm install express --save
+```
+
 The module “body-parser” enables reading (parsing) HTTP-POST data.
+
+```java
 npm install body-parser --save
+```
+
 Mongoose is a MongoDB client library providing object-modelling for use in an asynchronous environment. Mongoose supports both promises and callbacks.
+
+```java
 npm install mongoose --save
+```
+
 Multer is nodejs middleware used for uploading files.
+
+```java
 npm install multer --save
+```
+
 Dotenv is a zero-dependency module that loads environment variables from a .env file into process.env.
+
+```java
 npm install dotenv --save
+```
+
 EJS (Embedded Javascript) is a templating engine for nodejs. This engine helps to create an HTML pages via templates with minimal code.
+
+```java
 npm install ejs --save
+```
+
 nodemon is a developer tool that automatically restarts the node application when file changes in the code directory are detected.  It improves the developer experience when working on node-based applications.  Since this is a development tool and not part of our application code, we use `–save-dev` when installing this module:
+
+```java
 npm install nodemon --save-dev
+```
+
 Now let’s start coding!  To upload an image and retrieve image by MongoDB using Mangoose, follow each of the steps below one by one.
  
 
