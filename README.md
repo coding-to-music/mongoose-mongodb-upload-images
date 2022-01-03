@@ -33,13 +33,17 @@ npm install nodemon --save-dev
 Now let’s start coding!  To upload an image and retrieve image by MongoDB using Mangoose, follow each of the steps below one by one.
  
 
-Step 0: Create the file `.env` that will contain environment-specific settings.
+## Step 0: Create the file `.env` that will contain environment-specific settings.
 
+```java
 MONGO_URL=mongodb://localhost/imagesInMongoApp
 PORT=3000
-Step 1: Create our server file `app.js`.  Add the following code to it:
+```
+
+## Step 1: Create our server file `app.js`.  Add the following code to it:
 
 
+```java
 // Step 1 - set up express & mongoose
   
 var express = require('express')
@@ -50,14 +54,22 @@ var mongoose = require('mongoose')
 var fs = require('fs');
 var path = require('path');
 require('dotenv/config');
-Step 2: Connect to MongoDB using the URL for your database. Here ‘process.env.MONGO_URL’ is used for the database URL.  This value is retrieved from `.env` as an environment variable by the module `dotenv`.  Add the following code to `app.js`
+```
+
+## Step 2: Connect to MongoDB using the URL for your database. Here ‘process.env.MONGO_URL’ is used for the database URL.  This value is retrieved from `.env` as an environment variable by the module `dotenv`.  Add the following code to `app.js`
+
+```java
 // Step 2 - connect to the database
   
 mongoose.connect(process.env.MONGO_URL,
     { useNewUrlParser: true, useUnifiedTopology: true }, err => {
         console.log('connected')
     });
-Step 3: Once we have established a connection to our database and required all the necessary packages, we can now begin defining our server-side logic. So for storing an image in MongoDB, we need to create a schema with mongoose. For that create the file `model.js` file and define the schema. The important point here is that our data type for the image is a Buffer which allows us to store our image as data in the form of arrays.
+```
+
+## Step 3: Once we have established a connection to our database and required all the necessary packages, we can now begin defining our server-side logic. So for storing an image in MongoDB, we need to create a schema with mongoose. For that create the file `model.js` file and define the schema. The important point here is that our data type for the image is a Buffer which allows us to store our image as data in the form of arrays.
+
+```java
 // Step 3 - this is the code for ./models.js
   
 var mongoose = require('mongoose');
@@ -75,8 +87,14 @@ var imageSchema = new mongoose.Schema({
 //Image is a model which has a schema imageSchema
   
 module.exports = new mongoose.model('Image', imageSchema);
-Step 4: We want to set EJS as our templating engine with Express. EJS is specifically designed for building single-page, multi-page, and hybrid web applications. It has become the standard server framework for nodejs. The default behavior of EJS is that it looks into the `views` folder for the templates to render. We will create our templates in a later step.
+```
+
+
+## Step 4: We want to set EJS as our templating engine with Express. EJS is specifically designed for building single-page, multi-page, and hybrid web applications. It has become the standard server framework for nodejs. The default behavior of EJS is that it looks into the `views` folder for the templates to render. We will create our templates in a later step.
+
 Add the following code to `app.js`:
+
+```java
 // Step 3 - code was added to ./models.js
   
 // Step 4 - set up EJS
@@ -86,8 +104,12 @@ app.use(bodyParser.json())
   
 // Set EJS as templating engine 
 app.set("view engine", "ejs");
-Step 5: We will define the storage path for the image we are uploading. Here, we are using the middleware Multer to upload the photo to the server in a folder called `uploads` so we can process it.
+```
+
+## Step 5: We will define the storage path for the image we are uploading. Here, we are using the middleware Multer to upload the photo to the server in a folder called `uploads` so we can process it.
 Add the following code to `app.js`:
+
+```java
 // Step 5 - set up multer for storing uploaded files
   
 var multer = require('multer');
@@ -102,12 +124,21 @@ var storage = multer.diskStorage({
 });
   
 var upload = multer({ storage: storage });
-Step 6: Now, load the Image model by adding the following code to `app.js`:
+```
+
+## Step 6: Now, load the Image model by adding the following code to `app.js`:
+
+```java
 // Step 6 - load the mongoose model for Image
   
 var imgModel = require('./model');
-Step 7: Set up the handler for the GET request to our server. The response displays an HTML page showing all the images stored in the database, and provides a UI for uploading new images.
+```
+
+## Step 7: Set up the handler for the GET request to our server. The response displays an HTML page showing all the images stored in the database, and provides a UI for uploading new images.
+
 Add the following code to `app.js`:
+
+```java
 // Step 7 - the GET request handler that provides the HTML UI
   
 app.get('/', (req, res) => {
@@ -121,8 +152,13 @@ app.get('/', (req, res) => {
         }
     });
 });
-Step 8: Handle the POST request that processes the form data submitted by the user from our HTML UI.  This request will have the new images being uploaded.
+```
+
+## Step 8: Handle the POST request that processes the form data submitted by the user from our HTML UI.  This request will have the new images being uploaded.
+
 Add the following code to `app.js`:
+
+```java
 // Step 8 - the POST handler for processing the uploaded file
   
 app.post('/', upload.single('image'), (req, res, next) => {
@@ -145,8 +181,13 @@ app.post('/', upload.single('image'), (req, res, next) => {
         }
     });
 });
-Step 9: Configure the server to default port with the default of 3000. The environment variable process.env.PORT is used if set in your `.env`.
+```
+
+## Step 9: Configure the server to default port with the default of 3000. The environment variable process.env.PORT is used if set in your `.env`.
+
 Add the following code to `app.js`:
+
+```java
 // Step 9 - configure the server's port
   
 var port = process.env.PORT || '3000'
@@ -155,8 +196,13 @@ app.listen(port, err => {
         throw err
     console.log('Server listening on port', port)
 })
-Step 10: This is the HTML template for the “upload page”. Notice that the src parameter for the <img> is not a typical URL. This format enables displaying the image stored in binary format in the Mongo database, and we convert it to base64 so that the browser can render it.
+```
+
+## Step 10: This is the HTML template for the “upload page”. Notice that the src parameter for the <img> is not a typical URL. This format enables displaying the image stored in binary format in the Mongo database, and we convert it to base64 so that the browser can render it.
+
 Add the following code to the `views/imagesPage.ejs`:
+
+```java
 <!DOCTYPE html>
 <html lang="en">
   
@@ -219,12 +265,22 @@ Add the following code to the `views/imagesPage.ejs`:
 </body>
   
 </html>
-Step 11: Create the directory `uploads` that will hold our uploaded images.  The code in Step 8 refers to this directory.
+```
+
+## Step 11: Create the directory `uploads` that will hold our uploaded images.  The code in Step 8 refers to this directory.
  
-Step 12: Start the server by running the command: `nodemon app.js`
-Output Open your browser to http://localhost:3000/ .  You should now see:
+## Step 12: Start the server by running the command: `nodemon app.js`
+
+```java
+nodemon app.js
+```
+
+
+Output 
+
+Open your browser to http://localhost:3000/ .  You should now see:
  
 
-Demo
+![Demo](https://github.com/coding-to-music/mongoose-mongodb-upload-images/blob/main/images/image.gif?raw=true)
 
  Congratulations!  You did it!
