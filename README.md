@@ -1,6 +1,8 @@
-Upload and Retrieve Image on MongoDB using Mongoose
+# Upload and Retrieve Images on MongoDB using Mongoose, Express, EJS and Multer
 
 https://www.geeksforgeeks.org/upload-and-retrieve-image-on-mongodb-using-mongoose/
+
+https://github.com/coding-to-music/mongoose-mongodb-upload-images
 
 Difficulty Level : Medium
 
@@ -64,7 +66,7 @@ Now let’s start coding!  To upload an image and retrieve image by MongoDB usin
 ## Step 0: Create the file `.env` that will contain environment-specific settings.
 
 ```java
-MONGO_URL=mongodb://localhost/imagesInMongoApp
+MONGODB_URI=mongodb://localhost/imagesInMongoApp
 PORT=3000
 ```
 
@@ -84,12 +86,12 @@ var path = require('path');
 require('dotenv/config');
 ```
 
-## Step 2: Connect to MongoDB using the URL for your database. Here ‘process.env.MONGO_URL’ is used for the database URL.  This value is retrieved from `.env` as an environment variable by the module `dotenv`.  Add the following code to `app.js`
+## Step 2: Connect to MongoDB using the URL for your database. Here ‘process.env.MONGODB_URI’ is used for the database URL.  This value is retrieved from `.env` as an environment variable by the module `dotenv`.  Add the following code to `app.js`
 
 ```java
 // Step 2 - connect to the database
   
-mongoose.connect(process.env.MONGO_URL,
+mongoose.connect(process.env.MONGODB_URI,
     { useNewUrlParser: true, useUnifiedTopology: true }, err => {
         console.log('connected')
     });
@@ -301,6 +303,10 @@ Add the following code to the `views/imagesPage.ejs`:
 
 ```java
 nodemon app.js
+
+or
+
+kill-port 3000 && nodemon app.js
 ```
 
 
